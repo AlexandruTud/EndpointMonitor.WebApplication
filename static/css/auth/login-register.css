@@ -1,0 +1,167 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Lato", sans-serif;
+  background: url("../../images/auth/background.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+  overflow: hidden;
+  /* background: #19182e;*/
+}
+.box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 340px;
+  padding: 45px;
+  /* background: #262743;*/
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(15px);
+  box-sizing: border-box;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+}
+
+#role {
+  width: 100%;
+  padding: 10px 0;
+  font-size: 16px;
+  color: black;
+  letter-spacing: 1px;
+  margin-bottom: 30px;
+  border: none;
+  border-bottom: 1px solid black;
+  outline: none;
+  background: transparent;
+}
+
+.box h2 {
+  margin: 0 0 30px;
+  padding: 0;
+  text-align: center;
+  font-weight: normal;
+  color: black;
+}
+.box .inputBox {
+  position: relative;
+}
+.box .inputBox input {
+  width: 100%;
+  padding: 10px 0;
+  font-size: 16px;
+  color: black;
+  letter-spacing: 1px;
+  margin-bottom: 30px;
+  border: none;
+  border-bottom: 1px solid black;
+  outline: none;
+  background: transparent;
+}
+.box .inputBox label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  letter-spacing: 1px;
+  padding: 10px 0;
+  font-size: 14px;
+  color: black;
+  pointer-events: none;
+  transition: 0.5s;
+}
+.box .inputBox input:focus ~ label,
+.box .inputBox input:valid ~ label {
+  top: -18px;
+  left: 0;
+  color: black;
+  font-size: 12px;
+}
+.box .submit {
+  background-color: black;
+  border: none;
+  outline: none;
+  color: white;
+  background: black;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  width: 100%;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+#login:hover {
+  background-color: black;
+}
+
+.forgot-password {
+  text-decoration: none;
+  color: black;
+  cursor: pointer;
+  font-size: 13px;
+  float: right;
+  margin-top: 5px;
+}
+
+.forgot-password2 {
+  text-decoration: none;
+  color: black;
+  cursor: pointer;
+  font-size: 13px;
+  float: left;
+  margin-top: 5px;
+}
+
+.error-message {
+  color: red;
+  margin-bottom: 20px;
+}
+
+/* Stilizare separator */
+.separator {
+  width: 100%;
+  margin: 20px 0;
+  border: none;
+  border-top: 1px solid #ccc;
+}
+
+/* Stilizare text pe separator */
+.separator-text {
+  text-align: center;
+  margin-top: -15px; /* Ajustează poziția textului */
+  padding: 0 10px; /* Adaugă puțin spațiu în jurul textului */
+}
+
+/* Stilizare butoane sociale */
+.social-button {
+  display: inline-block;
+  width: calc(
+    100% - 5px
+  ); /* Setează lățimea la jumătate din lățimea containerului, minus spațiul */
+  margin-top: 10px;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #ececec;
+  color: #333;
+  font-size: 16px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.social-button.google {
+  background-color: #db4437;
+  color: white;
+}
+
+.social-button.github {
+  background-color: #333;
+  color: white;
+}
+
+/* Stilizare butoane la hover */
+.social-button:hover {
+  opacity: 0.8;
+}

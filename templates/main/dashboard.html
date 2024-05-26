@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <title>EndpointMonitor</title>
+    <link rel="stylesheet" href="../../static/css/main/dashboard.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://pixinvent.com/stack-responsive-bootstrap-4-admin-template/app-assets/css/bootstrap-extended.min.css">
+    <link rel="stylesheet" type="text/css" href="https://pixinvent.com/stack-responsive-bootstrap-4-admin-template/app-assets/fonts/simple-line-icons/style.min.css">
+    <link rel="stylesheet" type="text/css" href="https://pixinvent.com/stack-responsive-bootstrap-4-admin-template/app-assets/css/colors.min.css">
+    <link rel="stylesheet" type="text/css" href="https://pixinvent.com/stack-responsive-bootstrap-4-admin-template/app-assets/css/bootstrap.min.css"> 
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="./icons8-user-90.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin="" />
+  <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
+
+    <script type="module" src="../../static/js/main/dashboard.js"></script>
+</head>
+ 
+<body>
+  
+  <div class="sidebar">
+
+    <div class="logo-details">
+      <i class='bx bx-desktop icon'></i>
+        <div class="logo_name">EndpointMonitor</div>
+        <i class='bx bx-menu' id="btn" ></i>
+    </div>
+
+    <hr class="subtire"> 
+
+    <ul class="nav-list">
+
+     <li>
+        <a href="#" class="profile" id="dash">
+          <i class='bx bx-grid-alt' style="color: white;"></i>
+          <span class="links_name" id="sidebar_first">Dashboard</span>
+        </a>
+         <span class="tooltip">Dashboard</span>
+     </li>
+
+     <li>
+        <a href="#" class="comments" id="myApplications">
+          <i class='bx bx-list-ul' ></i>
+          <span class="links_name">My Applications</span>
+        </a>
+        <span class="tooltip">My Applications</span>
+      </li>
+
+     <li>
+       <a href="#" class="comments" id="notifications">
+        <div id="notificationBadge" class="notification-badge">0</div>
+         <i class='bx bx-bell' ></i>
+         <span class="links_name">Notifications</span>
+       </a>
+       <span class="tooltip">Notifications</span>
+     </li>
+
+     <li>
+       <a href="#" class="history" id="history">
+         <i class='bx bx-chart' ></i>
+         <span class="links_name">Statistics</span>
+       </a>
+       <span class="tooltip">Statistics</span>
+     </li>
+
+     <li>
+      <a href="#" class="comments" id="information">
+        <i class='bx bx-user' ></i>
+        <span class="links_name">Profile</span>
+      </a>
+      <span class="tooltip">Profile</span>
+    </li>
+
+
+
+     <li class="logoutClass" id="logout">
+      <a href="#" id="log_out_back">
+         <i class='bx bx-log-out' id="log_out" ></i>
+      </a>
+     </li>
+    </ul>
+
+  </div>
+   
+<!-- DASHBOARD SECTION -->
+  <section class="home-section">
+    <div class="grey-bg container-fluid p-2" id="dashh">
+        <section id="minimal-statistics">
+
+          <div class="row">
+            <div class="col-12 mt-0 mb-1">
+              <h4 class="text-uppercase">dashboard</h4>
+            </div>
+          </div>
+
+          <div class="linie">
+            <div class="search">
+              <input type="text" placeholder="Search Application" oninput="searchCards(event)">
+              <button><i class="fas fa-search"></i></button>
+            </div>
+          
+            <div class="auth" id="authArea">
+                <a href="../../templates/auth/login.html" class="authLink"><button class="authButton"><i class="fas fa-user-lock" style="margin-right: 5px;"></i>Login</button></a>
+                <a href="../../templates/auth/register.html" class="authLink"><button class="authButton"><i class="fas fa-user-plus" style="margin-right: 5px;"></i>Register</button></a>
+            </div>
+          </div>
+   
+        <div class="card-container" id="cards">
+          <div class="card" id="card">
+              <div class="circle" style="background: green;">
+                  <span class="number">Stable</span>
+              </div>
+              <div class="card-image">
+                  <img src="../../static/images/main/applications/123.jpg" >
+              </div>
+              <div class="card-content2">
+                  <h3>ChatApp</h3>
+                  <p id="Genre">O aplicație de mesagerie care permite utilizatorilor să trimită mesaje text, să trimită fișiere și să efectueze apeluri audio și video între ei.</p>
+                  <div class="card-content">
+                      <p id="free" class="free">USER1</p>
+                      <p id="long" class="free">10/02/2024</p>
+                  </div>
+                  <div class="card-content3">
+                    <button class="reportBug" style="color: red;" >Check endpoints</button>
+
+                  </div>
+                  <button class="reportBug2" id="viewReportsForApp" onclick="viewReportsApp()" >View reports</button>
+                  <button class="reportBug3" id="viewComms" onclick="viewComments()" >View comments</button>
+              </div>
+          </div>
+        </div>
+
+      <!--REPORTS popup-->
+      <div id="viewReportsApp" class="popup-container10">
+        <div class="content">
+          <div class="formbold-main-wrapper">
+            <div class="formbold-form-wrapper">
+              <button id="closeButtonReportsApp" type="button" class="close" aria-hidden="true" onclick="cancelViewHistoryAppModal()">&times;</button>
+              <div class="formbold-mb-5">
+                
+                <label for="timeFilter" style="color: black;">Filter by:</label>
+                <select id="timeRangeSelector">
+                  <option value="24h">Last 24 Hours</option>
+                  <option value="1m">This Month</option>
+                  <option value="1y">This Year</option>
+                </select>
+                <canvas id="reportChart" width="400" height="200"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+            <div id="viewComments" class="popup-container10">
+              <div class="content">
+                <div class="formbold-main-wrapper">
+                  <div class="formbold-form-wrapper">
+                    <button id="closeButtonComments" type="button" class="close" aria-hidden="true" onclick="cancelViewComments()">&times;</button>
+                    <div class="formbold-mb-5">
+                      
+                      <div id="containerCom">
+
+                        
+                        <div id="form_containerCom">
+                          <textarea placeholder="Add your comment here" type="text" id="comment_text"></textarea>
+                          <div class="tooltipCom">
+                              !
+                              <span class="tooltip-textCom">Please note that profane or offensive language will be removed.</span>
+                          </div>
+                          <div id="button_containerCom">
+                              <button id="submitCom">Post your comment</button>
+                          </div>
+                          <div id="youHave" style="color: black;">You have to be authentificated to post a comment!</div>
+                      </div>
+                    
+                        <div id="output_containerCom" class="comment_containerCom">
+
+
+                            <div class="commentCom" hidden>
+                                <div class="comment-headerCom">
+                                    <p class="usernameCom" id="usernameCom">alexandrukeryx@gmail.com</p>
+                                </div>
+                                <div class="comment-textCom">
+                                    <p id="commentCom">This is a commentary! WOW I WANT THIS APPLICATION VERY MUCH ITS AWESOME!</p>
+                                </div>
+                                <div class="comment-dateCom">
+                                  <p id="dateCom">16 may 2024 15:00:00</p>
+                              </div>
+                            </div>
+
+
+
+
+                        </div>
+
+                            
+                        </div>
+                        <div id="comment_countCom"><span id="numberOfComments">0</span> comments</div>
+                    </div>
+                    
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+    </section>
+</div>
+</section>
+
+<!-- MY APPLICATIONS SECTION -->
+  <section class="myapp-section">
+    <div class="grey-bg container-fluid p-2" id="dashh">
+      <section id="minimal-statistics">
+
+        <div class="row">
+          <div class="col-12 mt-0 mb-1">
+            <h4 class="text-uppercase">my applications</h4>
+          </div>
+        </div>
+
+        <div class="linie">
+          <div class="search">
+            <input placeholder="Search Application" oninput="searchMyApplicationsCards(event)">
+            <button><i class="fas fa-search"></i></button>
+          </div>
+          <div class="auth">
+            <button class="addAppButton" id="addSend"><i class="fas fa-plus" style="margin-right: 5px;"></i>Add an app</button>
+          </div>
+        </div>
+        
+  
+      <div class="card-container" id="myApplicationsCards">
+        <div class="card" id="myApplicationsCard">
+            <div class="circle" style="background: green;">
+                <span class="number">Stable</span>
+            </div>
+            <div class="card-image">
+                <img src="../../static/images/auth/background.jpg" >
+            </div>
+            <div class="card-content2">
+                <h3>ChatApp</h3>
+                <p id="Genre">O aplicație de mesagerie care permite utilizatorilor să trimită mesaje text, să trimită fișiere și să efectueze apeluri audio și video între ei.</p>
+                <div class="card-content">
+                    <p id="free" class="free">USER1</p>
+                    <p id="long" class="free">10/02/2024</p>
+                </div>
+                <div class="card-content3">
+                  <button class="reportBug" style="color: blue;" id="editEndpoint">Manage Endpoints</button>
+                  <button class="reportBug" style="color: red;" id="deleteApplicationButton">Delete</button>
+              </div>
+            </div>
+        </div>
+      </div>
+
+<!-- Modal HTML -->
+<div id="myModal" class="modal">
+	<div class="modal-dialog modal-confirm">
+		<div class="modal-content">
+			<div class="modal-header flex-column">
+				<div class="icon-box">
+					<i class="fa fa-times-circle-o" style="font-size: 4.75rem;"></i>
+				</div>						
+				<h4 class="modal-title w-100">Are you sure?</h4>	
+                <button type="button" class="close" id="cancelButtonApp" aria-hidden="true" onclick="closeApplicationModal()">&times;</button>
+			</div>
+			<div class="modal-body">
+				<p>Do you really want to delete this application? This process cannot be undone.</p>
+			</div>
+			<div class="modal-footer justify-content-center">
+				<button type="button" class="btn btn-secondary" id="cancelButtonApp" onclick="closeApplicationModal()">Cancel</button>
+				<button type="button" class="btn btn-danger" onclick="deleteCard()">Delete</button>
+			</div>
+		</div>
+	</div>
+</div>     
+
+
+<!--APPLICATION popup-->
+<div id="addSendModal" class="popup-container10">
+
+	<div class="content">
+	  <div class="formbold-main-wrapper">
+	    <div class="formbold-form-wrapper">
+					<button id="closeButton2" type="button" class="close" aria-hidden="true">&times;</button>
+	            <div class="modal-header2">
+                	<p id="headline">POST AN APPLICATION</p>
+
+                </div>
+
+	        <div class="formbold-mb-5">
+	          <label for="email" class="formbold-form-label">
+	            Enter the title: <span class="required"> *</span>
+	          </label>
+	          <input
+	            formControlName="courseTitle"
+	            type="title"
+	            name="title"
+	            id="applicationTitle"
+	            placeholder="Enter title for application"
+	            class="formbold-form-input" required
+	          />
+	        </div>
+	
+	        <div class="formbold-mb-5">
+	          <label for="description" class="formbold-form-label">
+	            Enter the description: <span class="required"> *</span>
+	          </label>
+	          <textarea
+	            formControlName="description"
+	            name="description"
+	            id="applicationDescription"
+	            placeholder="Enter application description"
+	            class="formbold-form-input" required
+	          ></textarea>
+	        </div>
+	
+	
+	        <div class="mb-0 pt-0">
+	          <label class="formbold-form-label formbold-form-label-2">
+	            Upload picture <span class="required"> *</span>
+	          </label>
+	
+            <input type="file" name="file" id="applicationImage" required />
+
+	          <div>
+
+              <div class="mb-0 pt-0">
+                <label class="formbold-form-label formbold-form-label-2">
+                  Upload picture twice (for security reasons) <span class="required"> *</span>
+                </label>
+      
+                <input type="file" name="file" id="applicationImage2" required />
+    
+                <div>
+	            <button class="formbold-btn w-full" id="addApplicationBtn" style="margin-top: 20px;">
+	              Upload Application
+	            </button>
+	          </div>
+	        </div>
+	    </div>
+	  </div>
+	</div>
+</div>
+
+        </div>
+        </div>
+
+        
+    </div>
+  </section>
+
+  <section class="editEndpoints">
+    <div class="grey-bg container-fluid p-2" id="dashh">
+      <section>
+        
+      <div class="linie2">
+        <div class="modal-header2">
+          <p id="headline">MANAGE ENDPOINTS</p>        
+
+          <div class="auth">
+            <div class="linie">
+          <button class="addAppButton" id="addEndpoint" style="margin-right: 10px;"><i class="fas fa-plus" style="margin-right: 5px;"></i>Add endpoint</button>
+          <select id="filterEndpoints" class="addAppButton" onchange="onFilterEndpoints(event)">
+            <option value="0">ALL</option>
+            <option value="1">STABLE</option>
+            <option value="2">UNSTABLE</option>
+            <option value="3">DOWN</option>
+          </select>
+          <div class="search2">
+            <input type="text" placeholder="Search Endpoint" oninput="searchEndpoints(event)">
+            <button><i class="fas fa-search"></i></button>
+        </div>        
+        </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="endpointsWrapper"></div>
+
+    <div class="method" id="getEndpoint" hidden>
+        <h2 class="get"><i class="fas fa-arrow-alt-circle-right"></i> GET</h2>
+        <div class="operation">
+          <div class="linie">
+            <span></span>
+              <div class="circle2" style="background: green;">
+                <span class="number">Stable</span>
+              </div>
+          </div>
+          <ul>
+              <li>URL: /api/resource</li>
+              <li>Parameters: None</li>
+              <li>Date created: 10/10/2023</li>
+          </ul>
+          <button class="view-statistics" id="viewStatisticsBtn">View statistics</button>
+          <button class="view-statistics" id="viewHistory" onclick="showHistory()">History</button>
+          <button class="delete-button" id="deleteEndpointBtn" onclick="deleteEndpointModal()">Delete</button>
+          <button class="delete-button" id="reportEndpoint">Report</button>
+        </div>
+    </div>
+    <div class="method" id="postEndpoint" hidden>
+        <h2 class="post"><i class="fas fa-plus-circle"></i> POST</h2>
+        <div class="operation">
+          <div class="linie">
+            <span></span>
+            <div class="circle2" style="background: green;">
+                <span class="number">Stable</span>
+                </div>
+          </div>
+            <ul>
+                <li>URL: /api/resource</li>
+                <li>Parameters: JSON data</li>
+                <li>Date created: 10/10/2023</li>
+            </ul>
+            <button class="view-statistics" id="viewStatisticsBtn">View statistics</button>
+            <button class="view-statistics" id="viewHistory" onclick="showHistory()">History</button>
+            <button class="delete-button" id="deleteEndpointBtn" onclick="deleteEndpointModal()">Delete</button>
+            <button class="delete-button" id="reportEndpoint">Report</button>
+        </div>
+    </div>
+    <div class="method" id="putEndpoint" hidden>
+        <h2 class="put"><i class="fas fa-pen-alt"></i> PUT</h2>
+        <div class="operation">
+          <div class="linie">
+            <span></span>
+            <div class="circle2" style="background: green;">
+                <span class="number">Stable</span>
+                </div>
+          </div>
+            <ul>
+                <li>URL: /api/resource/{id}</li>
+                <li>Parameters: JSON data, resource ID</li>
+                <li>Date created: 10/10/2023</li>
+            </ul>
+            <button class="view-statistics" id="viewStatisticsBtn">View statistics</button>
+            <button class="view-statistics" id="viewHistory" onclick="showHistory()">History</button>
+            <button class="delete-button" id="deleteEndpointBtn" onclick="deleteEndpointModal()">Delete</button>
+            <button class="delete-button" id="reportEndpoint">Report</button>
+        </div>
+    </div>
+    <div class="method" id="patchEndpoint" hidden>
+    <h2 class="patch"><i class="fas fa-pen-alt"></i> PATCH</h2>
+    <div class="operation">
+      <div class="linie">
+        <span></span>
+        <div class="circle2" style="background: green;">
+            <span class="number">Stable</span>
+            </div>
+      </div>
+        <ul>
+            <li>URL: /api/resource/{id}</li>
+            <li>Parameters: JSON data, resource ID</li>
+            <li>Date created: 10/10/2023</li>
+        </ul>
+        <button class="view-statistics" id="viewStatisticsBtn">View statistics</button>
+        <button class="view-statistics" id="viewHistory" onclick="showHistory()">History</button>
+        <button class="delete-button" id="deleteEndpointBtn" onclick="deleteEndpointModal()">Delete</button>
+        <button class="delete-button" id="reportEndpoint">Report</button>
+    </div>
+    <div class="method" id="deleteEndpoint" hidden>
+      <h2 class="delete"><i class="fas fa-trash-alt"></i> DELETE</h2>
+      <div class="operation">
+        <div class="linie">
+          <span></span>
+          <div class="circle2" style="background: green;">
+              <span class="number">Stable</span>
+          </div>
+        </div>
+        <ul>
+            <li>URL: /api/resource/{id}</li>
+            <li>Parameters: Resource ID</li>
+            <li>Date created: 10/10/2023</li>
+        </ul>
+        <button class="view-statistics" id="viewStatisticsBtn">View statistics</button>
+        <button class="view-statistics" id="viewHistory" onclick="showHistory()">History</button>
+        <button class="delete-button" id="deleteEndpointBtn" onclick="deleteEndpointModal()">Delete</button>
+        <button class="delete-button" id="reportEndpoint">Report</button>
+      </div>
+    </div>
+      
+      </section>
+  </div>
+  </section>
+
+        <!--ENDPOINT popup-->
+<div id="addEndpointModal" class="popup-container10">
+
+	<div class="content">
+	  <div class="formbold-main-wrapper">
+	    <div class="formbold-form-wrapper">
+					<button onclick="closeEndpointModal()" type="button" class="close" aria-hidden="true">&times;</button>
+	            <div class="modal-header2">
+                	<p id="headline">ADD AN ENDPOINT</p>
+
+                </div>
+	        <div class="formbold-mb-5">
+	          <label for="email" class="formbold-form-label">
+	            Enter the url: <span class="required"> *</span>
+	          </label>
+	          <input
+	            type="title"
+	            name="url"
+	            id="endpointUrl"
+	            placeholder="Enter url for endpoint"
+	            class="formbold-form-input" required
+	          />
+	        </div>
+	
+	        <div class="formbold-mb-5">
+	          <label for="description" class="formbold-form-label">
+	            Select type: <span class="required"> *</span>
+	          </label>
+            <select name="description" id="endpointType" formControlName="description" class="formbold-form-input" required>
+              <option value="1">GET</option>
+              <option value="2">POST</option>
+              <option value="3">PUT</option>
+              <option value="4">PATCH</option>
+              <option value="5">DELETE</option>
+            </select>
+	        </div>
+	        <div class="mb-0 pt-0">
+	          <div>
+	            <button class="formbold-btn w-full" onclick="addEndpoint()" style="margin-top: 20px;">
+	              Add Endpoint
+	            </button>
+	          </div>
+	        </div>
+	    </div>
+	  </div>
+	</div>
+</div>
+
+
+            <!-- PROFILE popup-->
+            <div class="overlay" id="viewProfile">
+              <div class="popup-container11">
+                <div class="content">
+                  <div class="formbold-main-wrapper">
+                    <div class="formbold-form-wrapper">
+                      <button id="closeButtonProfile" type="button" class="close" aria-hidden="true">&times;</button>
+                      <div class="formbold-mb-5">
+                        <div id="personalStatsEmail" class="email" style="margin-bottom: 20px;">alex@gmail.com</div>
+                        <div class="total">
+                          <p>Total projects</p>
+                          <span id="totalProjectsLabel">5</span>
+                        </div>
+                        <div class="total">
+                          <p>Total endpoints</p>
+                          <span id="totalEndpointsLabel">50</span>
+                        </div>
+                        <div class="total">
+                          <p>Stable endpoints</p>
+                          <span id="endpointsStableLabel" style="color: green;">40</span>
+                        </div>
+                        <div class="total">
+                          <p>Unstable endpoints</p>
+                          <span id="endpointsUnstableLabel" style="color: rgb(152, 152, 0);">5</span>
+                        </div>
+                        <div class="total">
+                          <p>Down endpoints</p>
+                          <span id="endpointsDownLabel" style="color: red;">5</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+  <section class="comments-section">
+    <div class="grey-bg container-fluid p-2" id="dashh">
+      <div class="row">
+          <div class="col-12 mt-0 mb-1">
+              <h4 class="text-uppercase">notifications</h4>
+          </div>
+      </div>
+
+      <!--<button class="addAppButton" onclick="notifyMe()" style="width: 400px;">Enable browser notifications</button> -->
+
+      <ul class="comment-list" id="notificationWrapper">
+          <li class="idea" id="notification" hidden>
+              <div class="idea-author-and-buttons">
+                  <div class="idea-author">example@example.com</div>
+                  <div class="idea-buttons">
+                      <button class="approve-button" id="approveButton_0">Mark as solved</button>
+                  </div>
+              </div>
+              <div class="idea-info">
+                  <div class="idea-text">Comment content here</div>
+                  <div class="auth2">
+                    <div class="idea-category" style="margin-right: 10px;">Application: <span>example</span></div>
+
+                    <div class="idea-category" style="margin-left: 10px; margin-right: 10px;">Endpoint: <span>example</span></div>
+
+                    <div class="idea-category" style="margin-left: 10px;">Type: <span>example</span></div>
+                  </div>
+                  <div class="idea-date">DD/MM/YYYY HH:MM:SS</div>
+              </div>
+          </li>
+      </ul>
+
+    </div>
+  </section>
+
+  <!-- STATISTICS SECTION -->
+  <section class="history-section">
+    <div class="grey-bg container-fluid p-2" id="dashh">
+      <section id="minimal-statistics">
+        <div class="row">
+          <div class="col-12 mt-0 mb-1">
+            <h4 class="text-uppercase">statistics</h4>
+          </div>
+        </div>
+  
+        <div class="row">
+          <div class="col-xl-4 col-sm-6 col-12">
+            <div class="card1" id="card1">
+              <div class="card-content">
+                <div class="card-body">
+                  <div class="media d-flex">
+                    <div class="media-body text-left">
+                      <h3 class="warning" id="totalApplicationsLabel">Loading...</h3>
+                      <span style="color: white;">Total Applications</span>
+                    </div>                  
+                    <div class="align-self-center">
+                      <i class="bx bxs-archive-in warning font-large-2 float-right"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-4 col-sm-6 col-12">
+            <div class="card1">
+              <div class="card-content">
+                <div class="card-body">
+                  <div class="media d-flex">
+                    <div class="media-body text-left">
+                      <h3 class="primary" id="totalEndpointsGeneralLabel">Loading...</h3>
+                      <span style="color: white;">Total Endpoints</span>
+                    </div>
+                    <div class="align-self-center">
+                      <i class="bx bx-network-chart primary font-large-2 float-right"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+      
+          <div class="col-xl-4 col-sm-6 col-12">
+            <div class="card1">
+              <div class="card-content">
+                <div class="card-body">
+                  <div class="media d-flex">
+                    <div class="media-body text-left">
+                      <h3 class="danger" id="totalUsersLabel">Loading...</h3>
+                      <span style="color: white;">Total Users</span>
+                    </div>
+                    <div class="align-self-center">
+                      <i class="bx bx-user danger font-large-2 float-right"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+        </div> 
+  
+        <div class="row">
+          <div class="col-xl-12 col-md-12">
+            <div class="card1 overflow-hidden">
+              <div class="card-content">
+                <div class="card-body cleartfix">
+                  <div class="media d-flex">
+                    <div class="media-body text-left">
+                      <h1 class="primary" id="totalEndpointCallsLabel">Loading...</h1>
+                      <h4 style="color: white;">Total Reports in History</h4>
+                    </div>
+                    
+                    <div class="primary align-self-center">
+    
+                    </div>
+                    <div class="align-self-center">
+                      <i class="bx bx-message-square-detail primary font-large-2 float-right" id="small3"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+    
+        </div>
+      
+      </section>
+      
+      <section id="stats-subtitle">
+      <div class="row">
+        <div class="col-12 mt-3 mb-1">
+          <h4 class="text-uppercase">CHARTS</h4>
+        </div>
+      </div>
+    
+      
+      <div class="row">
+        <div class="col-xl-6 col-md-12">
+          <div class="card1">
+            <div class="card-content">
+              <div class="card-body cleartfix">
+                <div class="media align-items-stretch">
+                  <div class="media-body">
+                    <canvas id="myChartFirst" class="canvas-container"></canvas>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    
+        <div class="col-xl-6 col-md-12">
+          <div class="card1">
+            <div class="card-content">
+              <div class="card-body cleartfix">
+                <div class="media align-items-stretch">
+                  <div class="media-body">
+                    <canvas id="myChartSecond" class="canvas-container"></canvas>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+  
+    </section>
+  
+  
+  
+    </div>
+  </section>
+
+
+  <div class="navbar-bottom">
+    <ul class="nav-list">
+      <li>
+        <a href="#" class="profile" id="dash-navbar">
+          <i class='bx bx-grid-alt' style="color: white;"></i>
+          <span class="links_name" >Dashboard</span>
+        </a>
+         <span class="tooltip">Dashboard</span>
+     </li>
+
+     <li>
+        <a href="#" class="comments" id="apps-navbar">
+          <i class='bx bx-list-ul' ></i>
+          <span class="links_name">My Applications</span>
+        </a>
+        <span class="tooltip">My Applications</span>
+      </li>
+
+     <li>
+       <a href="#" class="comments" id="comments-navbar">
+         <i class='bx bx-bell' ></i>
+         <span class="links_name">Notifications</span>
+       </a>
+       <span class="tooltip">Notifications</span>
+     </li>
+
+     <li>
+      <a href="#" class="history" id="history-navbar">
+        <i class='bx bx-chart' ></i>
+        <span class="links_name">Statistics</span>
+      </a>
+      <span class="tooltip">Statistics</span>
+    </li>
+
+     <li>
+      <a href="#" class="comments" id="information-navbar">
+        <i class='bx bx-user' ></i>
+        <span class="links_name">Profile</span>
+      </a>
+      <span class="tooltip">Profile</span>
+    </li>
+
+
+
+     <li class="profile">
+      <a href="#" id="log_out_back2">
+         <i class='bx bx-log-out' id="log_out" ></i>
+      </a>
+     </li>
+
+    </ul>
+  </div>
+
+   <!-- REPORT  popup-->
+<div id="reportPopup" class="popup-container10">
+
+	<div class="content">
+	  <div class="formbold-main-wrapper">
+	    <div class="formbold-form-wrapper">
+					<button id="closeButtonReportPopup" type="button" class="close" aria-hidden="true" onclick="cancelReportModal()">&times;</button>
+	            <div class="modal-header2">
+                	<p id="headline">REPORT A BUG</p>
+
+                </div>
+	
+	        <div class="formbold-mb-5">
+	          <label for="description" class="formbold-form-label">
+	            Enter the comment: <span class="required"> *</span>
+	          </label>
+	          <input
+	            name="description"
+	            id="reportMentions"
+	            placeholder="Enter comment"
+	            class="formbold-form-input" required
+	          />
+	        </div>
+
+          <div class="formbold-mb-5">
+	          <label for="code" class="formbold-form-label">
+	            Select the code: <span class="required"> *</span>
+	          </label>
+            <select name="code" id="codeHistory" formControlName="code" class="formbold-form-input" required>
+              <option value="400">400</option>
+              <option value="404">404</option>
+              <option value="500">500</option>
+              <option value="503">503</option>
+            </select>
+	        </div>
+	
+	
+	          <div>
+	            <button class="formbold-btn w-full" id="reportBtn" style="margin-top: 20px;" onclick="addReport()">
+	              Report
+	            </button>
+	          </div>
+	        </div>
+	    </div>
+	  </div>
+	</div>
+</div>
+<!-- HISTORY popup-->
+<div id="viewHistoryPopup" class="popup-container10">
+  <div class="content">
+    <div class="formbold-main-wrapper">
+      <div class="formbold-form-wrapper">
+        <button id="closeButtonStatisticsChoice" type="button" class="close" aria-hidden="true" onclick="cancelHistory()">&times;</button>
+        <div class="modal-header2">
+          <p id="headline">History</p>
+        </div>
+
+        <div class="formbold-mb-5">
+          <ul class="timeline" id="historyWrapper">
+            <li class="timeline-inverted" id="historyEndpoint" hidden>
+              <div class="timeline-panel">
+                <div class="timeline-badge" style="margin-bottom: 10px;">01/02/2018 18:00:00</div>
+                <div class="timeline-badge" style="background-color: green">Code: 200</div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--ALEGERE STATISTICS popup-->
+<div id="viewStatisticsChoice" class="popup-container10">
+
+  <div class="content">
+    <div class="formbold-main-wrapper">
+      <div class="formbold-form-wrapper">
+          <button id="closeButtonStatisticsChoice" type="button" class="close" aria-hidden="true" onclick="cancelEndpointStatisticsModal()">&times;</button>
+              <div class="modal-header2">
+                  <p id="headline">Select how far back you want to view the statistics</p>
+
+                </div>
+
+        
+          <div class="formbold-mb-5">
+            <label for="number" class="formbold-form-label">
+                Enter the number: <span class="required"> *</span>
+            </label>
+            <input
+                type="text"
+                name="url"
+                id="endpointStatisticsHours"
+                placeholder="Enter number"
+                class="formbold-form-input"
+                required
+                oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+            />
+        </div>
+        
+  
+          <div class="formbold-mb-5">
+            <label for="description" class="formbold-form-label">
+              Select the unit: <span class="required"> *</span>
+            </label>
+            <select name="description" id="endpointStatisticsUnit" formControlName="description" class="formbold-form-input" required>
+              <option value="1">HOURS</option>
+              <option value="2">DAYS</option>
+            </select>
+          </div>
+    
+  
+          <div class="mb-0 pt-0">
+            <div>
+              <button class="formbold-btn w-full" id="submitStatistics" onclick="showEndpointStatistics()" style="margin-top: 20px;">
+                Submit
+              </button>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      <!--STATISTICS popup-->
+      <div id="viewStatistics" class="popup-container10">
+        <div class="content">
+          <div class="formbold-main-wrapper">
+            <div class="formbold-form-wrapper">
+              <button id="closeButtonStatistics" type="button" class="close" aria-hidden="true" onclick="cancelEndpointStatisticsModal()">&times;</button>
+              <div class="formbold-mb-5">
+                <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
+                <button id="downloadButton" class="circle3" style="background: red; font-size: 24px;">
+                  <span class="number"><i class="bx bx-download"></i></span>
+                </button>
+                <div id="endpointStatisticsState" class="stateEndpoint" style="margin-top: 20px; background-color: yellowgreen;">Unstable</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Modal HTML -->
+<div id="myModal2" class="modal">
+	<div class="modal-dialog modal-confirm">
+		<div class="modal-content">
+			<div class="modal-header flex-column">
+				<div class="icon-box">
+					<i class="fa fa-times-circle-o" style="font-size: 4.75rem;"></i>
+				</div>						
+				<h4 class="modal-title w-100">Are you sure?</h4>	
+                <button type="button" class="close" id="cancelButtonEnd" aria-hidden="true" onclick="cancelDeleteEndpointModal()">&times;</button>
+			</div>
+			<div class="modal-body">
+				<p>Do you really want to delete this endpoint? This process cannot be undone.</p>
+			</div>
+			<div class="modal-footer justify-content-center">
+				<button type="button" class="btn btn-secondary" id="cancelButtonEnd" onclick="cancelDeleteEndpointModal()">Cancel</button>
+				<button type="button" class="btn btn-danger" onclick="onDeleteEndpoint()">Delete</button>
+			</div>
+		</div>
+	</div>
+</div> 
+</body>
+</html>
+
+
+

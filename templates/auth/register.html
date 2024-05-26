@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="../../static/css/auth/login-register.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Lato"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="./icons8-user-90.png" />
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.js"
+      integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
+    <script type="module" src="../../static/js/auth/register.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+    <title>Register Page</title>
+  </head>
+  <body>
+    <div class="box">
+      <h2>Create your account</h2>
+      <form id="login-form">
+        <div class="inputBox">
+          <input type="text" id="email" required />
+          <label><i class="fa fa-envelope"></i> Email</label>
+        </div>
+        <div class="inputBox">
+          <input type="password" id="password" required />
+          <label><i class="fa fa-lock"></i> Password</label>
+        </div>
+        <div class="inputBox">
+          <input type="password" id="confirmPassword" required />
+          <label><i class="fa fa-lock"></i> Repeat your password</label>
+        </div>
+        <div id="error" class="error-message"></div>
+        <input
+          class="submit"
+          type="button"
+          name="register"
+          value="Register"
+          id="register"
+          onclick="handleSubmit()"
+        />
+        <a href="login.html" class="forgot-password">Already a user?</a>
+        <hr class="separator" style="margin-top: 40px" />
+        <div class="separator-text">Or connect with</div>
+        <button class="social-button github" onclick="connectWithGithub()">
+          <i class="fab fa-github"></i>
+        </button>
+      </form>
+    </div>
+  </body>
+</html>
